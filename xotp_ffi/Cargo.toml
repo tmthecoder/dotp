@@ -1,0 +1,12 @@
+[package]
+name = "xotp_ffi"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "xotp_ffi"
+crate-type = ["cdylib", "staticlib"]
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+xotp = "0.1.0"
