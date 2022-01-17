@@ -15,7 +15,9 @@ A new Flutter project.
   s.source           = { :path => '.' }
   s.source_files     = 'Classes/**/*'
   s.dependency 'FlutterMacOS'
-
+  s.public_header_files = 'Classes**/*.h'
+  s.vendored_libraries = '**/*.a'
+  s.static_framework = true
   s.platform = :osx, '10.11'
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
   s.swift_version = '5.0'
