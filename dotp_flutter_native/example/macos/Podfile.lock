@@ -1,0 +1,22 @@
+PODS:
+  - dotp_flutter_native (0.0.1):
+    - FlutterMacOS
+  - FlutterMacOS (1.0.0)
+
+DEPENDENCIES:
+  - dotp_flutter_native (from `Flutter/ephemeral/.symlinks/plugins/dotp_flutter_native/macos`)
+  - FlutterMacOS (from `Flutter/ephemeral`)
+
+EXTERNAL SOURCES:
+  dotp_flutter_native:
+    :path: Flutter/ephemeral/.symlinks/plugins/dotp_flutter_native/macos
+  FlutterMacOS:
+    :path: Flutter/ephemeral
+
+SPEC CHECKSUMS:
+  dotp_flutter_native: 9fb0e3e276e98632c08fbb430941078cd482e4d1
+  FlutterMacOS: 57701585bf7de1b3fc2bb61f6378d73bbdea8424
+
+PODFILE CHECKSUM: 6eac6b3292e5142cfc23bdeb71848a40ec51c14c
+
+COCOAPODS: 1.11.2

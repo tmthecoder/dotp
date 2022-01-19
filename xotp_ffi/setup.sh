@@ -39,21 +39,21 @@ if [ -f target/bindings.h ]; then rm target/bindings.h; fi
 cbindgen ./src/lib.rs -c cbindgen.toml | grep -v \#include | uniq >> target/bindings.h
 
 # Copy each Android library to its respective directory
-cp target/aarch64-linux-android/release/libxotp_ffi.so ../dotp_native/android/src/main/jniLibs/arm64-v8a/libxotp_ffi.so
-cp target/armv7-linux-androideabi/release/libxotp_ffi.so ../dotp_native/android/src/main/jniLibs/armeabi-v7a/libxotp_ffi.so
-cp target/i686-linux-android/release/libxotp_ffi.so ../dotp_native/android/src/main/jniLibs/x86/libxotp_ffi.so
-cp target/x86_64-linux-android/release/libxotp_ffi.so ../dotp_native/android/src/main/jniLibs/x86_64/libxotp_ffi.so
+cp target/aarch64-linux-android/release/libxotp_ffi.so ../dotp_flutter_native/android/src/main/jniLibs/arm64-v8a/libxotp_ffi.so
+cp target/armv7-linux-androideabi/release/libxotp_ffi.so ../dotp_flutter_native/android/src/main/jniLibs/armeabi-v7a/libxotp_ffi.so
+cp target/i686-linux-android/release/libxotp_ffi.so ../dotp_flutter_native/android/src/main/jniLibs/x86/libxotp_ffi.so
+cp target/x86_64-linux-android/release/libxotp_ffi.so ../dotp_flutter_native/android/src/main/jniLibs/x86_64/libxotp_ffi.so
 
 # Copy the iOS Library and header file
-cp target/universal/release/libxotp_ffi.a ../dotp_native/ios/libxotp_ffi.a
-cp target/bindings.h ../dotp_native/ios/Classes/xotp_bindings.h
+cp target/universal/release/libxotp_ffi.a ../dotp_flutter_native/ios/libxotp_ffi.a
+cp target/bindings.h ../dotp_flutter_native/ios/Classes/xotp_bindings.h
 
 # Copy the Windows DLL to its respective directory
-cp target/x86_64-pc-windows-gnu/release/xotp_ffi.dll ../dotp_native/windows/native/xotp_ffi.dll
+cp target/x86_64-pc-windows-gnu/release/xotp_ffi.dll ../dotp_flutter_native/windows/native/xotp_ffi.dll
 
 # Create a macOS FAT library and copy it to the respective directory
 if [ -d target/universal-apple-darwin ]; then rm -rf target/universal-apple-darwin; fi
 mkdir target/universal-apple-darwin
 lipo -create target/x86_64-apple-darwin/release/libxotp_ffi.a target/aarch64-apple-darwin/release/libxotp_ffi.a -output target/universal-apple-darwin/libxotp_ffi.a
-cp target/universal-apple-darwin/libxotp_ffi.a ../dotp_native/macos/libxotp_ffi.a
-cp target/bindings.h ../dotp_native/macos/Classes/xotp_bindings.h
+cp target/universal-apple-darwin/libxotp_ffi.a ../dotp_flutter_native/macos/libxotp_ffi.a
+cp target/bindings.h ../dotp_flutter_native/macos/Classes/xotp_bindings.h
