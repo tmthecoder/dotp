@@ -1,12 +1,33 @@
 // Append to dotp.h
 
-enum Digest {
-  SHA1 = 1,
-  SHA256 = 2,
-  SHA512 = 3,
-};
-typedef uint8_t Digest;
+typedef HOTP HOTP;
 
-uint32_t get_current_totp_from_utf8(const char *secret, Digest digest);
+typedef TOTP TOTP;
 
-uint32_t get_current_totp_from_base32(const char *secret, Digest digest);
+typedef ParseError ParseError;
+
+typedef enum OTPResult_Tag {
+  ParsedHOTP,
+  ParsedTOTP,
+  Error,
+} OTPResult_Tag;
+
+typedef struct ParsedHOTP_Body {
+  const HOTP *_0;
+  uint64_t _1;
+} ParsedHOTP_Body;
+
+typedef struct OTPResult {
+  OTPResult_Tag tag;
+  union {
+    ParsedHOTP_Body parsed_hotp;
+    struct {
+      const TOTP *parsed_totp;
+    };
+    struct {
+      const ParseError *error;
+    };
+  };
+} OTPResult;
+
+const struct OTPResult *get_otp_from_uri(const char *uri);

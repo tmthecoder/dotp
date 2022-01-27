@@ -2,6 +2,7 @@
 import 'dart:ffi';
 import 'dart:io';
 
+import 'package:dotp_flutter_native/generated_bindings.dart';
 import 'package:ffi/ffi.dart';
 
 typedef OTPFromUTF8 = int Function(Pointer<Utf8>, int);
@@ -13,13 +14,8 @@ class DotpFlutterNative {
       : DynamicLibrary.process();
 
   void lookup() {
-    final OTPFromUTF8 function =_xotp
-        .lookup<NativeFunction<OTPFromUTF8FFI>>("get_current_totp_from_utf8")
-        .asFunction();
-    String secret = "12345678901234567890";
-    Pointer<Utf8> secretPtr = secret.toNativeUtf8();
-    int code = function(secretPtr, 0x1);
-    malloc.free(secretPtr);
-    print("CODE: $code");
+    print("Lookup");
+    Pointer<OTPResult> hashResult = NativeLibrary(_xotp).get_otp_from_uri("otpauth://hotp/ACME%20Co:john.doe@email.com?secret=HXDMVJECJJWSRB3HWIZR4IFUGFTMXBOZ&issuer=ACME%20Co&digits=8&counter=1234".toNativeUtf8());
+    print("Finish ${hashResult.ref.tag}");
   }
 }
