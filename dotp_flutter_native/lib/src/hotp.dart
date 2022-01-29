@@ -24,7 +24,7 @@ class HOTP extends OTPAlgorithm {
 
   @override
   void destroy() {
-
+    xotp.XOTP().hotp_free(hotpRef);
   }
 
 }

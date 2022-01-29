@@ -23,7 +23,7 @@ class TOTP extends OTPAlgorithm {
   // dispose of the pointer
   @override
   void destroy() {
-
+    xotp.XOTP().totp_free(totpRef);
   }
 
 }
