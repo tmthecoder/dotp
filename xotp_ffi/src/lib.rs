@@ -37,6 +37,7 @@ pub extern "C" fn get_hotp_instance(secret: *const c_char, digits: u32) -> *cons
     Box::into_raw(Box::new(hotp))
 }
 
+#[no_mangle]
 pub extern "C" fn get_totp_instance(secret: *const c_char, digest: Digest, digits: u32, period: u64) -> *const TOTP {
     let mac_digest = match digest {
         Digest::SHA1 => MacDigest::SHA1,
@@ -44,19 +45,23 @@ pub extern "C" fn get_totp_instance(secret: *const c_char, digest: Digest, digit
         Digest::SHA512 => MacDigest::SHA512,
     };
     let totp = TOTP::new_from_base32(get_str_from_cstr(secret), mac_digest, digits, period);
-    Box::into_raw(Box::new(top))
+    Box::into_raw(Box::new(totp))
 }
 
+#[no_mangle]
 pub extern "C" fn hotp_get_otp(hotp: *const HOTP, counter: u64) -> u32 {
-    *&hotp.get_otp(counter)
+    let hotp = *unsafe { Box::from_raw(hotp as *mut HOTP) };
+    hotp.get_otp(counter)
 }
 
+#[no_mangle]
 pub extern "C" fn totp_get_otp(totp: *const TOTP) -> u32 {
     let time = SystemTime::now()
         .duration_since(UNIX_EPOCH)
         .expect("Failed to get time")
         .as_secs();
-   *&totp.get_otp(time)
+    let totp = *unsafe { Box::from_raw(totp as *mut TOTP) };
+   totp.get_otp(time)
 }
 
 // #[no_mangle]
