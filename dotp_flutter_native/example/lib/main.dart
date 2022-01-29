@@ -17,22 +17,27 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
+  OTPAlgorithm algorithm = getOTPFromURI("otpauth://totp/ACME%20Co:john@example.com?secret=27FLAJRGS7VE3MUFZMOYFJTCD4TDPCOT&issuer=ACME%20Co&algorithm=SHA1&digits=6&period=30");
+
   @override
   void initState() {
     super.initState();
+  }
 
+  @override
+  void dispose() {
+   algorithm.destroy();
   }
 
   @override
   Widget build(BuildContext context) {
-    DotpFlutterNative().lookup();
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: const Center(
-          child: Text('Running on: '),
+        body: Center(
+          child: Text('OTP: ${algorithm.getOtp()}'),
         ),
       ),
     );

@@ -6,7 +6,7 @@
 import 'dart:ffi';
 
 import 'package:dotp_flutter_native/src/otp_algorithm.dart';
-import 'package:dotp_flutter_native/xotp.dart' as xotp;
+import 'package:dotp_flutter_native/src/xotp.dart' as xotp;
 
 class TOTP extends OTPAlgorithm {
 

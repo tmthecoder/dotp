@@ -42,6 +42,24 @@ pub extern "C" fn totp_get_otp(totp: *const TOTP) -> u32 {
     totp.get_otp(time).as_u32()
 }
 
+#[no_mangle]
+pub extern "C" fn totp_free(totp: *const TOTP) {
+    if !totp.is_null() {
+       unsafe {
+           drop(Box::from_raw(totp as *mut TOTP));
+       }
+    }
+}
+
+#[no_mangle]
+pub extern "C" fn hotp_free(hotp: *const HOTP) {
+    if !hotp.is_null() {
+        unsafe {
+            drop(Box::from_raw(hotp as *mut HOTP));
+        }
+    }
+}
+
 fn get_str_from_cstr(cstr: *const c_char) -> &'static str {
     let str = unsafe { CStr::from_ptr(cstr) };
     str.to_str().expect("Failed to get string")
