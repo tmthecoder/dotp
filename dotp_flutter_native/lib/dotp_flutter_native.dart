@@ -15,7 +15,7 @@ class DotpFlutterNative {
 
   void lookup() {
     print("Lookup");
-    NativeLibrary library = NativeLibrary(_xotp);
+    XOTP library = XOTP(_xotp);
     Pointer<OTPResult> hashResult = library.get_otp_from_uri("otpauth://totp/ACME%20Co:john@example.com?secret=27FLAJRGS7VE3MUFZMOYFJTCD4TDPCOT&issuer=ACME%20Co&algorithm=SHA1&digits=6&period=30".toNativeUtf8());
     print("Got result");
     switch (hashResult.ref.tag) {
