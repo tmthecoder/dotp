@@ -15,7 +15,21 @@ class DotpFlutterNative {
 
   void lookup() {
     print("Lookup");
-    Pointer<OTPResult> hashResult = NativeLibrary(_xotp).get_otp_from_uri("otpauth://hotp/ACME%20Co:john.doe@email.com?secret=HXDMVJECJJWSRB3HWIZR4IFUGFTMXBOZ&issuer=ACME%20Co&digits=8&counter=1234".toNativeUtf8());
-    print("Finish ${hashResult.ref.tag}");
+    NativeLibrary library = NativeLibrary(_xotp);
+    Pointer<OTPResult> hashResult = library.get_otp_from_uri("otpauth://totp/ACME%20Co:john@example.com?secret=27FLAJRGS7VE3MUFZMOYFJTCD4TDPCOT&issuer=ACME%20Co&algorithm=SHA1&digits=6&period=30".toNativeUtf8());
+    print("Got result");
+    switch (hashResult.ref.tag) {
+      case OTPResult_Tag.ParsedHOTP:
+        int otp = library.hotp_get_otp(hashResult.ref.body.hotpBody.hotpPtr, hashResult.ref.body.hotpBody.counter);
+        print("HOTP: $otp");
+        break;
+      case OTPResult_Tag.ParsedTOTP:
+        int otp = library.totp_get_otp(hashResult.ref.body.totpPtr);
+        print("TOTP: $otp");
+        break;
+      case OTPResult_Tag.Error:
+        print("ERROR");
+        break;
+    }
   }
 }

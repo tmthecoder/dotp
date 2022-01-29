@@ -31,3 +31,7 @@ typedef struct OTPResult {
 } OTPResult;
 
 const struct OTPResult *get_otp_from_uri(const char *uri);
+
+uint32_t hotp_get_otp(const HOTP *hotp, uint64_t counter);
+
+uint32_t totp_get_otp(const TOTP *totp);

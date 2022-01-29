@@ -34,6 +34,36 @@ class NativeLibrary {
               ffi.Pointer<Utf8>)>>('get_otp_from_uri');
   late final _get_otp_from_uri = _get_otp_from_uriPtr
       .asFunction<ffi.Pointer<OTPResult> Function(ffi.Pointer<Utf8>)>();
+
+  int hotp_get_otp(
+    ffi.Pointer<HOTP> hotp,
+    int counter,
+  ) {
+    return _hotp_get_otp(
+      hotp,
+      counter,
+    );
+  }
+
+  late final _hotp_get_otpPtr = _lookup<
+          ffi.NativeFunction<ffi.Uint32 Function(ffi.Pointer<HOTP>, ffi.Uint64)>>(
+      'hotp_get_otp');
+  late final _hotp_get_otp =
+      _hotp_get_otpPtr.asFunction<int Function(ffi.Pointer<HOTP>, int)>();
+
+  int totp_get_otp(
+    ffi.Pointer<TOTP> totp,
+  ) {
+    return _totp_get_otp(
+      totp,
+    );
+  }
+
+  late final _totp_get_otpPtr =
+      _lookup<ffi.NativeFunction<ffi.Uint32 Function(ffi.Pointer<TOTP>)>>(
+          'totp_get_otp');
+  late final _totp_get_otp =
+      _totp_get_otpPtr.asFunction<int Function(ffi.Pointer<TOTP>)>();
 }
 
 class HOTP extends ffi.Opaque {}
@@ -49,16 +79,16 @@ abstract class OTPResult_Tag {
 }
 
 class ParsedHOTP_Body extends ffi.Struct {
-  external ffi.Pointer<HOTP> _0;
+  external ffi.Pointer<HOTP> hotpPtr;
 
-  @ffi.Int32()
-  external int _1;
+  @ffi.Uint64()
+  external int counter;
 }
 
 class OTPResult_Body extends ffi.Union {
-  external ParsedHOTP_Body hotp;
-  external ffi.Pointer<TOTP> totp;
-  external ffi.Pointer<ParseError> error;
+  external ParsedHOTP_Body hotpBody;
+  external ffi.Pointer<TOTP> totpPtr;
+  external ffi.Pointer<ParseError> errorPtr;
 }
 
 class OTPResult extends ffi.Struct {

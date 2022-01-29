@@ -12,3 +12,4 @@ crate-type = ["cdylib", "staticlib"]
 
 [dependencies.xotp]
 version = "0.2.0"
+#features = [ "ffi" ]
