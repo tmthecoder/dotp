@@ -5,4 +5,5 @@
 
 abstract class OTPAlgorithm {
   int getOtp();
+  void destroy();
 }

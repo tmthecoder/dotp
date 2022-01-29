@@ -2,7 +2,7 @@
 import 'dart:ffi';
 import 'dart:io';
 
-import 'package:dotp_flutter_native/generated_bindings.dart';
+import 'package:dotp_flutter_native/xotp.dart';
 import 'package:ffi/ffi.dart';
 
 typedef OTPFromUTF8 = int Function(Pointer<Utf8>, int);
@@ -15,7 +15,7 @@ class DotpFlutterNative {
 
   void lookup() {
     print("Lookup");
-    XOTP library = XOTP(_xotp);
+    XOTP library = XOTP();
     Pointer<OTPResult> hashResult = library.get_otp_from_uri("otpauth://totp/ACME%20Co:john@example.com?secret=27FLAJRGS7VE3MUFZMOYFJTCD4TDPCOT&issuer=ACME%20Co&algorithm=SHA1&digits=6&period=30".toNativeUtf8());
     print("Got result");
     switch (hashResult.ref.tag) {

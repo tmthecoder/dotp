@@ -1,10 +1,10 @@
 // Append to dotp.h
 
-typedef struct HOTP HOTP;
+typedef HOTP HOTP;
 
-typedef struct TOTP TOTP;
+typedef TOTP TOTP;
 
-typedef struct ParseError ParseError;
+typedef ParseError ParseError;
 
 typedef enum OTPResult_Tag {
   ParsedHOTP,
@@ -35,3 +35,7 @@ const struct OTPResult *get_otp_from_uri(const char *uri);
 uint32_t hotp_get_otp(const HOTP *hotp, uint64_t counter);
 
 uint32_t totp_get_otp(const TOTP *totp);
+
+void totp_free(const TOTP *totp);
+
+void hotp_free(const HOTP *hotp);
