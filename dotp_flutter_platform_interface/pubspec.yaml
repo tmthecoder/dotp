@@ -1,0 +1,19 @@
+name: dotp_flutter_platform_interface
+description: The common platform interface for the dotp_flutter.
+repository: https://github.com/tmthecoder/dotp
+version: 1.0.0
+
+environment:
+  sdk: ">=2.14.0 <3.0.0"
+  flutter: ">=2.5.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  plugin_platform_interface: '^2.0.0'
+#  dotp_interface:
+#    path: '../dotp_interface/'
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter

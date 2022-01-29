@@ -27,8 +27,8 @@ pub extern "C" fn get_otp_from_uri(uri: *const c_char) -> *const OTPResult {
 #[no_mangle]
 pub extern "C" fn hotp_get_otp(hotp: *const HOTP, counter: u64) -> u32 {
     if hotp == std::ptr::null() { return 0 }
-    let hotp = *unsafe { Box::from_raw(hotp as *mut HOTP) };
-    hotp.get_otp(counter)
+    let hotp = unsafe { &*hotp };
+    hotp.get_otp(counter).as_u32()
 }
 
 #[no_mangle]
@@ -39,10 +39,8 @@ pub extern "C" fn totp_get_otp(totp: *const TOTP) -> u32 {
         .expect("Failed to get time")
         .as_secs();
     let totp = unsafe { &*totp };
-    totp.get_otp(time)
+    totp.get_otp(time).as_u32()
 }
-
-// fn get_otp_totp(totp: *const TOTP)
 
 fn get_str_from_cstr(cstr: *const c_char) -> &'static str {
     let str = unsafe { CStr::from_ptr(cstr) };
