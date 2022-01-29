@@ -1,10 +1,10 @@
 // Append to dotp.h
 
-typedef HOTP HOTP;
+typedef struct HOTP HOTP;
 
-typedef TOTP TOTP;
+typedef struct TOTP TOTP;
 
-typedef ParseError ParseError;
+typedef struct ParseError ParseError;
 
 typedef enum OTPResult_Tag {
   ParsedHOTP,
