@@ -22,6 +22,8 @@ class HOTP extends OTPAlgorithm {
     return otp;
   }
 
+  // Until finalizers are added into Dart, we have to manually
+  // dispose of the pointer
   @override
   void destroy() {
     xotp.XOTP().hotp_free(hotpRef);
