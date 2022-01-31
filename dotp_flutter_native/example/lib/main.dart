@@ -26,7 +26,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void dispose() {
-   algorithm.destroy();
+    super.dispose();
+    algorithm.destroy();
   }
 
   @override

@@ -28,6 +28,10 @@ cargo ndk -t armeabi-v7a -t arm64-v8a -t x86_64 -t x86 build --release
 
 cargo build --target x86_64-pc-windows-gnu --release
 
+# Generate linux
+
+cargo build --target x86_64-unknown-linux-gnu --release
+
 # Generate macOS
 
 cargo build --target x86_64-apple-darwin --release
@@ -50,6 +54,9 @@ cp target/bindings.h ../dotp_flutter_native/ios/Classes/xotp_bindings.h
 
 # Copy the Windows DLL to its respective directory
 cp target/x86_64-pc-windows-gnu/release/xotp_ffi.dll ../dotp_flutter_native/windows/native/xotp_ffi.dll
+
+# Copy the Linux .so to its respective directory
+cp target/x86_64-unknown-linux-gnu/release/libxotp_ffi.so ../dotp_flutter_native/linux/native/libxotp_ffi.dll
 
 # Create a macOS FAT library and copy it to the respective directory
 if [ -d target/universal-apple-darwin ]; then rm -rf target/universal-apple-darwin; fi
