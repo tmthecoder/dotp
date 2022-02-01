@@ -20,6 +20,6 @@ target_link_libraries(${PLUGIN_NAME} PRIVATE PkgConfig::GTK)
 
 # List of absolute paths to libraries that should be bundled with the plugin
 set(dotp_flutter_native_bundled_libraries
-  ""
+  "${CMAKE_CURRENT_SOURCE_DIR}/native/libxotp_ffi.so"
   PARENT_SCOPE
 )
